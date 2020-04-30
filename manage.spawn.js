@@ -5,6 +5,8 @@ var manageSpawn = {
         bootstrapIfNeedBe(spawn);
         decayEnergyUse(spawn);
 
+        autoExtensions(spawn);
+
         autoRemoteWar(spawn);
         
         if (!spawn.spawning) {
@@ -462,6 +464,22 @@ remoteCarryNeeded = function(spawn, remoteRoomIndex) {
         totalTime += timesArray[i] + 10;
     }
     return 0.09 * totalTime;
+}
+
+autoExtensions = function(spawn) {
+    var controller = spawn.room.controller;
+    var maxExtensions = [0, 0, 5, 10, 20, 30, 40, 50, 60][controller.level];
+    for (flagName in Game.flags) {
+        var flag = Game.flags[flagName];
+        if (flag.color == COLOR_YELLOW &&
+            flag.memory["order"] <= maxExtensions &&
+            flag.memory["spawn"] == spawn.name) {
+            var res = spawn.room.createConstructionSite(flag.pos.x,flag.pos.y,
+                                                        STRUCTURE_EXTENSION);
+            if (res == OK) { flag.remove(); }
+        }
+    }
+    
 }
 
 module.exports = manageSpawn;
