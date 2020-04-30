@@ -100,26 +100,30 @@ findBuild = function(creep) {
     return null;
 }
 
-findRepair = function(creep) {
+findRepair = function(creep, additionalFilter = (structure => true)) {
     var target;
     if (creep.memory["target"]) {
         target = Game.getObjectById(creep.memory["target"]);
         if (target && target.hits < target.hitsMax) { return target; }
     }
     var filter = object => object.hits < (object.hitsMax / 2) &&
-        object.structureType != STRUCTURE_ROAD;
+        object.structureType != STRUCTURE_ROAD &&
+        additionalFilter(object);
     target = creep.pos.findClosestByRange(FIND_STRUCTURES, { filter: filter });
     if (!target) {
         filter = object => object.hits < object.hitsMax &&
-            object.structureType != STRUCTURE_ROAD;
+            object.structureType != STRUCTURE_ROAD &&
+            additionalFilter(object);
         target = creep.pos.findClosestByRange(FIND_STRUCTURES, { filter: filter });
     }
     if (!target) {
-        filter = object => object.hits < (object.hitsMax / 2);
+        filter = object => object.hits < (object.hitsMax / 2) &&
+            additionalFilter(object);
         target = creep.pos.findClosestByRange(FIND_STRUCTURES, { filter: filter });
     }
     if (!target) {
-        filter = object => object.hits < object.hitsMax;
+        filter = object => object.hits < object.hitsMax &&
+            additionalFilter(object);
         target = creep.pos.findClosestByRange(FIND_STRUCTURES, { filter: filter });
     }
     if (target) {

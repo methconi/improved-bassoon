@@ -481,4 +481,13 @@ autoExtensions = function(spawn) {
     
 }
 
+/*
+for (i = 1; i <= 15; i++) {
+    if (Game.flags["Extension_"+i]) {
+        Game.flags["Extension_"+i].memory["order"]=i;
+        Game.flags["Extension_"+i].memory["spawn"]="Spawn1";
+    }
+}
+*/
+
 module.exports = manageSpawn;
