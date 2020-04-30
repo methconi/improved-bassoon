@@ -213,12 +213,11 @@ targetCreeps = function(spawn) {
             { name: "Carrier_4", body: bodyCarrier, role: "carrier" },
             { name: "Harvester_5", body: bodyHarvester, role: "harvester", source: 0 },
             { name: "Harvester_6", body: bodyHarvester, role: "harvester", source: 1 },
-            { name: "Carrier_5", body: bodyCarrier, role: "carrier" },
             { name: "Builder_2", body: bodyBuilder, role: "builder" },
             { name: "Upgrader_2", body: bodyUpgrader, role: "upgrader" },
-            { name: "Builder_6", body: bodyBuilder, role: "builder" },
+            { name: "Builder_3", body: bodyBuilder, role: "builder" },
             { name: "Upgrader_3", body: bodyUpgrader, role: "upgrader" },
-            { name: "Carrier_6", body: bodyCarrier, role: "carrier" },
+            { name: "Carrier_5", body: bodyCarrier, role: "carrier" },
             { name: "Upgrader_4", body: bodyUpgrader, role: "upgrader" } ];
     }
 }
