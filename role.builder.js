@@ -81,7 +81,7 @@ findBuild = function(creep) {
         target = Game.getObjectById(creep.memory["target"]);
         if (target) { return target; }
     }
-    var filter = site => site.structureType != STRUCTURE_ROAD;
+    var filter = site => site.structureType == STRUCTURE_ROAD;
     target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES, { filter: filter });
     if (!target) { 
         target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
