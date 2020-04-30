@@ -32,7 +32,9 @@ var roleBuilder = {
                 builderChooseNonPickupMode(creep);
             }
         } if (creep.memory["mode"] == "repair") {
-            var target = findRepair(creep);
+            var filter = (structure =>
+                          structure.structureType != STRUCTURE_WALL);
+            var target = findRepair(creep, filter);
             if(target) {
                 var res = creep.repair(target)
                 if(res == ERR_NOT_IN_RANGE) {
@@ -61,11 +63,15 @@ builderChooseNonPickupMode = function(creep) {
         if (target) {
             creep.memory["mode"] = "build";
         } else {
-            findRepair(creep);
+            var filter = (structure =>
+                          structure.structureType != STRUCTURE_WALL);
+            findRepair(creep, filter);
             creep.memory["mode"] = "repair";
         }
     } else {
-        target = findRepair(creep);
+        var filter = (structure =>
+                      structure.structureType != STRUCTURE_WALL);
+        target = findRepair(creep, filter);
         if (target) {
             creep.memory["mode"] = "repair";
         } else {
