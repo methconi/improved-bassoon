@@ -191,7 +191,7 @@ targetCreeps = function(spawn) {
             { name: "Carrier_4", body: bodyCarrier, role: "carrier" },
             { name: "Builder_2", body: bodyBuilder, role: "builder" },
             { name: "Upgrader_2", body: bodyUpgrader, role: "upgrader" },
-            { name: "Carrier_5", body: bodyCarrier, role: "carrier" },
+            //{ name: "Carrier_5", body: bodyCarrier, role: "carrier" },
             { name: "Upgrader_3", body: bodyUpgrader, role: "upgrader" },
             { name: "Upgrader_4", body: bodyUpgrader, role: "upgrader" } ];
     } else {
@@ -217,7 +217,7 @@ targetCreeps = function(spawn) {
             { name: "Upgrader_2", body: bodyUpgrader, role: "upgrader" },
             { name: "Builder_3", body: bodyBuilder, role: "builder" },
             { name: "Upgrader_3", body: bodyUpgrader, role: "upgrader" },
-            { name: "Carrier_5", body: bodyCarrier, role: "carrier" },
+            //{ name: "Carrier_5", body: bodyCarrier, role: "carrier" },
             { name: "Upgrader_4", body: bodyUpgrader, role: "upgrader" } ];
     }
 }
@@ -482,7 +482,7 @@ autoExtensions = function(spawn) {
 }
 
 /*
-for (i = 1; i <= 15; i++) {
+for (i = 1; i <= 60; i++) {
     if (Game.flags["Extension_"+i]) {
         Game.flags["Extension_"+i].memory["order"]=i;
         Game.flags["Extension_"+i].memory["spawn"]="Spawn1";
