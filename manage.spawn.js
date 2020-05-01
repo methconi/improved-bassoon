@@ -161,7 +161,8 @@ targetCreeps = function(spawn) {
             { name: "Carrier_2", body: bodyCarrier, role: "carrier" },
             { name: "Upgrader_1", body: bodyUpgrader, role: "upgrader" },
             { name: "Builder_1", body: bodyBuilder, role: "builder" },
-            { name: "Carrier_3", body: bodyCarrier, role: "carrier" },
+            { name: "Carrier_3", body: bodyCarrier, role: "carrier",
+              mem: { onlyUpgrade: true }},
             { name: "Upgrader_2", body: bodyUpgrader, role: "upgrader" }/*,
             { name: "Carrier_4", body: bodyCarrier, role: "carrier" },
             { name: "Builder_2", body: bodyBuilder, role: "builder" }*/ ];
