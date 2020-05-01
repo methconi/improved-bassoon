@@ -11,7 +11,7 @@ var manageTower = {
         if(target) {
             var res = tower.repair(target)
             if (res == OK) {
-                creepRecordEnergyUse(tower, "repair");
+                //creepRecordEnergyUse(tower, "repair");
                 return;
             }
         }
