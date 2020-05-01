@@ -96,7 +96,7 @@ findBuild = function(creep, additionalFilter = (site => true)) {
                   && additionalFilter(site));
     target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES, { filter: filter });
     if (!target) {
-        filter = affitionalFilter;
+        filter = additionalFilter;
         target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES, { filter: filter });
     }
     if (target) {
