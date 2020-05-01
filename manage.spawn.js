@@ -76,7 +76,8 @@ targetCreeps = function(spawn) {
             /*{ name: "Carrier_2", body: bodyCarrier, role: "carrier",
               mem: { onlyUpgrade: true } },*/
             { name: "Upgrader_1", body: bodyUpgrader, role: "upgrader" },
-            { name: "Builder_1", body: bodyBuilder, role: "builder" },
+            { name: "Builder_1", body: bodyBuilder, role: "builder",
+              condition: builderNeeded },
             { name: "Upgrader_2", body: bodyUpgrader, role: "upgrader" },
             
             { name: "Upgrader_3", body: bodyUpgrader, role: "upgrader",
@@ -493,5 +494,25 @@ for (i = 1; i <= 60; i++) {
     }
 }
 */
+
+builderNeeded = function(spawn) {
+    var hasSite = false;
+    for (id in Game.constructionSites) {
+        var site = Game.constructionSites[id];
+        if (site.room && site.room.name == spawn.room.name) {
+            hasSite = true;
+            break;
+        }
+    }
+    if (hasSite) { return true; }
+    
+    if (spawn.pos.findClosestByRange(FIND_STRUCTURES, {
+        filter: (structure => structure.structureType == STRUCTURE_TOWER) })) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 
 module.exports = manageSpawn;
