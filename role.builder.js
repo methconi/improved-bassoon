@@ -57,6 +57,14 @@ var roleBuilder = {
 builderChooseNonPickupMode = function(creep) {
     creep.memory["target"] = null;
     var target;
+
+    var spawn = Game.spawns[creep.memory["spawn"]]
+    if (hasTower(spawn)) {
+        findBuild(creep, builderBuildFilter);
+        creep.memory["mode"] = "build";
+        return;
+    }
+    
     if (Math.random() < 0.9) {
         target = findBuild(creep, builderBuildFilter);
         if (target) {

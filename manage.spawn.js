@@ -510,13 +510,20 @@ builderNeeded = function(spawn) {
         }
     }
     
-    if (spawn.pos.findClosestByRange(FIND_STRUCTURES, {
-        filter: (structure => structure.structureType == STRUCTURE_TOWER) })) {
-        return false;
-    } else {
-        return true;
-    }
+    return !hasTower(spawn);
 }
 
+hasTower = function(spawn) {
+    if (typeof spawn.hasTower == "boolean") {
+        return spawn.hasTower;
+    }
+    if (spawn.pos.findClosestByRange(FIND_STRUCTURES, {
+        filter: (structure => structure.structureType == STRUCTURE_TOWER) })) {
+        spawn.hasTower = true;
+    } else {
+        spawn.hasTower = false;
+    }
+    return spawn.hasTower;
+}
 
 module.exports = manageSpawn;
