@@ -73,20 +73,24 @@ targetCreeps = function(spawn) {
             { name: "Harvester_1", body: bodyHarvester, role: "harvester", source: 0 },
             { name: "Carrier_1", body: bodyCarrier, role: "carrier" },
             { name: "Harvester_2", body: bodyHarvester, role: "harvester", source: 1 },
-            /*{ name: "Carrier_2", body: bodyCarrier, role: "carrier",
-              mem: { onlyUpgrade: true } },*/
-            { name: "Upgrader_1", body: bodyUpgrader, role: "upgrader" },
+            
+            { name: "Upgrader_1", body: bodyUpgrader, role: "upgrader" },            
             { name: "Builder_1", body: bodyBuilder, role: "builder",
               condition: builderNeeded },
-            { name: "Upgrader_2", body: bodyUpgrader, role: "upgrader" },
+            
+            { name: "Upgrader_2", body: bodyUpgrader, role: "upgrader",
+              condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 7) },
+            { name: "Carrier_2", body: bodyCarrier, role: "carrier",
+              condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 7),
+              mem: { onlyUpgrade: true } },
             
             { name: "Upgrader_3", body: bodyUpgrader, role: "upgrader",
               condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 14)},
-            { name: "Carrier_3", body: bodyCarrier, role: "carrier",
-              condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 14),
-              mem: { onlyUpgrade: true } },
             { name: "Upgrader_4", body: bodyUpgrader, role: "upgrader",
               condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 21)},
+            { name: "Carrier_3", body: bodyCarrier, role: "carrier",
+              condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 21),
+              mem: { onlyUpgrade: true } },
             
             { name: "Remote_Claimer_1", body: bodyRemoteClaimer, role: "remoteClaimer", remoteClaim: true },
 
@@ -164,9 +168,10 @@ targetCreeps = function(spawn) {
             { name: "Builder_1", body: bodyBuilder, role: "builder" },
             /*{ name: "Carrier_3", body: bodyCarrier, role: "carrier",
               mem: { onlyUpgrade: true }},*/
-            { name: "Upgrader_2", body: bodyUpgrader, role: "upgrader" },
+            { name: "Upgrader_2", body: bodyUpgrader, role: "upgrader",
+              condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 7) },
             { name: "Upgrader_3", body: bodyUpgrader, role: "upgrader",
-              condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 14)}/*,
+              condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 14) }/*,
             { name: "Carrier_4", body: bodyCarrier, role: "carrier" },
             { name: "Builder_2", body: bodyBuilder, role: "builder" }*/ ];
     } else if (extensions >= 5) {
@@ -496,15 +501,12 @@ for (i = 1; i <= 60; i++) {
 */
 
 builderNeeded = function(spawn) {
-    var hasSite = false;
     for (id in Game.constructionSites) {
         var site = Game.constructionSites[id];
         if (site.room && site.room.name == spawn.room.name) {
-            hasSite = true;
-            break;
+            return true;
         }
     }
-    if (hasSite) { return true; }
     
     if (spawn.pos.findClosestByRange(FIND_STRUCTURES, {
         filter: (structure => structure.structureType == STRUCTURE_TOWER) })) {
