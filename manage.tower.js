@@ -2,6 +2,16 @@ var manageTower = {
     
     run: function(tower) {
         addMemory(tower);
+
+        var spawnName = tower.memory["spawn"];
+        var spawn = null;
+        if (spawnName) {
+            spawn = Game.spawns[spawnName];
+        }
+
+        if (spawn) {
+            creepApplyRecordedEnergyUse(tower);
+        }
         
         var target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
         if (!target) { target = tower.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES); }
@@ -15,12 +25,6 @@ var manageTower = {
                 creepRecordEnergyUse(tower, "repair");
                 return;
             }
-        }
-
-        var spawnName = tower.memory["spawn"];
-        var spawn = null;
-        if (spawnName) {
-            spawn = Game.spawns[spawnName];
         }
         
         if (spawn && spawn.memory["energyUse"]
