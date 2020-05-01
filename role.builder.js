@@ -20,7 +20,7 @@ var roleBuilder = {
                 builderChooseNonPickupMode(creep);
             }            
         } if (creep.memory["mode"] == "build") {
-            var target = findBuild(creep, builderBuildFilter);
+            var target = findBuild(creep, builderBuildFilter(creep));
             if(target) {
                 var res = creep.build(target)
                 if(res == ERR_NOT_IN_RANGE) {
@@ -60,13 +60,13 @@ builderChooseNonPickupMode = function(creep) {
 
     var spawn = Game.spawns[creep.memory["spawn"]]
     if (hasTower(spawn)) {
-        findBuild(creep, builderBuildFilter);
+        findBuild(creep, builderBuildFilter(creep));
         creep.memory["mode"] = "build";
         return;
     }
     
     if (Math.random() < 0.9) {
-        target = findBuild(creep, builderBuildFilter);
+        target = findBuild(creep, builderBuildFilter(creep));
         if (target) {
             creep.memory["mode"] = "build";
         } else {
@@ -80,7 +80,7 @@ builderChooseNonPickupMode = function(creep) {
         if (target) {
             creep.memory["mode"] = "repair";
         } else {
-            findBuild(creep, builderBuildFilter);
+            findBuild(creep, builderBuildFilter(creep));
             creep.memory["mode"] = "build";
         }
     }
