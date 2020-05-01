@@ -49,6 +49,10 @@ var roleBuilder = {
             recordEnergyUse(Game.spawns[creep.memory["spawn"]], "idleBuilder",
                             creepCostPerTick(creep));
             clearRoad(creep);
+            if (creep.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
+                creep.memory["mode"] = "pickup";
+                creep.memory["target"] = null;
+            }
         }
     }
     

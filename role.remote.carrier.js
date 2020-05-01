@@ -231,6 +231,7 @@ remoteCarrierMeasure = function(creep) {
                 return;
             } else {
                 creep.memory["measureReachedSource"] = true;
+                creep.memory["target"] = null;
                 return;
             }
         }
@@ -251,8 +252,14 @@ remoteCarrierMeasure = function(creep) {
             creep.moveTo(exit);
             return;
         } else {
-            if (!creep.pos.inRangeTo(spawn, 1)) {
-                creep.moveTo(spawn);
+            var target = creep.memory["target"];
+            if (!target) { target = creep.findClosestByRange(FIND_STRUCTURES, {
+                filter: (structure => structure.structureType == STRUCTURE_STORAGE) }); }
+            if (!target) { target = spawn; }
+            creep.memory["target"] = target;
+                
+            if (!creep.pos.inRangeTo(target, 1)) {
+                creep.moveTo(target);
                 return;
             } else {
                 creep.memory["measureDone"] = true;
