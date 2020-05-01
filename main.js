@@ -139,7 +139,6 @@ findEnergy = function(creep, opts = {}) {
     }
         
     if (target) {
-        creep.memory["energyHope"] = 2;
         creep.memory["target"] = target.id;
         return target;
     } else {
@@ -151,9 +150,11 @@ takeEnergy = function(creep, target) {
     var res;
     if (target.resourceType == RESOURCE_ENERGY) {
         res = creep.pickup(target);
-        return res;
     } else {
-        return creep.withdraw(target, RESOURCE_ENERGY);
+        res = creep.withdraw(target, RESOURCE_ENERGY);
+    }
+    if (res == OK) {
+        creep.memory["energyHope"] = 2;
     }
 }
 
