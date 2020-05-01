@@ -73,8 +73,8 @@ targetCreeps = function(spawn) {
             { name: "Harvester_1", body: bodyHarvester, role: "harvester", source: 0 },
             { name: "Carrier_1", body: bodyCarrier, role: "carrier" },
             { name: "Harvester_2", body: bodyHarvester, role: "harvester", source: 1 },
-            { name: "Carrier_2", body: bodyCarrier, role: "carrier",
-              mem: { onlyUpgrade: true } },
+            /*{ name: "Carrier_2", body: bodyCarrier, role: "carrier",
+              mem: { onlyUpgrade: true } },*/
             { name: "Upgrader_1", body: bodyUpgrader, role: "upgrader" },
             { name: "Builder_1", body: bodyBuilder, role: "builder" },
             { name: "Upgrader_2", body: bodyUpgrader, role: "upgrader" },
@@ -161,8 +161,8 @@ targetCreeps = function(spawn) {
             { name: "Carrier_2", body: bodyCarrier, role: "carrier" },
             { name: "Upgrader_1", body: bodyUpgrader, role: "upgrader" },
             { name: "Builder_1", body: bodyBuilder, role: "builder" },
-            { name: "Carrier_3", body: bodyCarrier, role: "carrier",
-              mem: { onlyUpgrade: true }},
+            /*{ name: "Carrier_3", body: bodyCarrier, role: "carrier",
+              mem: { onlyUpgrade: true }},*/
             { name: "Upgrader_2", body: bodyUpgrader, role: "upgrader" },
             { name: "Upgrader_3", body: bodyUpgrader, role: "upgrader",
               condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 14)}/*,
