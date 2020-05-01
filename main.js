@@ -123,20 +123,15 @@ findEnergy = function(creep, opts = {}) {
                                 tombstone.pos.inRangeTo(creep, 2)) &&
                                additionalFilter(tombstone)); 
     var tombstone = creep.pos.findClosestByRange(FIND_TOMBSTONES, { filter: filter });
-
-    console.log(creep.name + " A " + (target && target.id));
+    
     if (tombstone) {
         target = tombstone;
     } else {
         target = closestEnergyOrContainer(creep, additionalFilter, (avoidStorageLevel >= 1),
                                           creep.store.getFreeCapacity(RESOURCE_ENERGY));
-        
-        console.log(creep.name + " B " + (target && target.id));
         if (!target) {
             target = closestEnergyOrContainer(creep, additionalFilter, (avoidStorageLevel >= 2), 1);
         }
-        
-        console.log(creep.name + " C " + (target && target.id));
         if (!target) {
             creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: structure => (structure.structureType == STRUCTURE_STORAGE &&
@@ -146,7 +141,6 @@ findEnergy = function(creep, opts = {}) {
         
     if (target) {
         creep.memory["target"] = target.id;
-        console.log(creep.name + " " + target.id);
         return target;
     } else {
         creep.memory["target"] = null;
@@ -163,6 +157,7 @@ takeEnergy = function(creep, target) {
     if (res == OK) {
         creep.memory["energyHope"] = 2;
     }
+    return res;
 }
 
 buildRoad = function(from, to) {
