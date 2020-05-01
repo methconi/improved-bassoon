@@ -32,7 +32,7 @@ var roleBuilder = {
                 builderChooseNonPickupMode(creep);
             }
         } if (creep.memory["mode"] == "repair") {
-            var filter = builderRepairFilter();
+            var filter = builderRepairFilter(creep);
             var target = findRepair(creep, filter);
             if(target) {
                 var res = creep.repair(target)
@@ -62,12 +62,12 @@ builderChooseNonPickupMode = function(creep) {
         if (target) {
             creep.memory["mode"] = "build";
         } else {
-            var filter = builderRepairFilter();
+            var filter = builderRepairFilter(creep);
             findRepair(creep, filter);
             creep.memory["mode"] = "repair";
         }
     } else {
-        var filter = builderRepairFilter();
+        var filter = builderRepairFilter(creep);
         target = findRepair(creep, filter);
         if (target) {
             creep.memory["mode"] = "repair";
@@ -141,8 +141,10 @@ findRepair = function(creep, additionalFilter = (structure => true)) {
     return null;
 }
 
-builderRepairFilter = function() {
-    return (structure => true);
+builderRepairFilter = function(creep) {
+    return (structure => (creep.pos.inRangeTo(structure, 15) ||
+                          (creep.timeToLive > 200 &&
+                           creep.store.getFreeCapacity() == 0)));
 }
             
 

@@ -7,9 +7,8 @@ var manageTower = {
         if (!target) { target = tower.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES); }
         if (target) { tower.attack(target); return; }
 
-        var filter = builderRepairFilter();
         tower.memory["target"] = null;
-        target = findRepair(tower, filter);
+        target = findRepair(tower);
         if(target) {
             var res = tower.repair(target);
             if (res == OK) {
