@@ -124,19 +124,19 @@ findEnergy = function(creep, opts = {}) {
                                additionalFilter(tombstone)); 
     var tombstone = creep.pos.findClosestByRange(FIND_TOMBSTONES, { filter: filter });
 
-    console.log(creep.name + " A " + target.id);
+    console.log(creep.name + " A " + (target && target.id));
     if (tombstone) {
         target = tombstone;
     } else {
         target = closestEnergyOrContainer(creep, additionalFilter, (avoidStorageLevel >= 1),
                                           creep.store.getFreeCapacity(RESOURCE_ENERGY));
         
-        console.log(creep.name + " B " + target.id);
+        console.log(creep.name + " B " + (target && target.id));
         if (!target) {
             target = closestEnergyOrContainer(creep, additionalFilter, (avoidStorageLevel >= 2), 1);
         }
         
-        console.log(creep.name + " C " + target.id);
+        console.log(creep.name + " C " + (target && target.id));
         if (!target) {
             creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: structure => (structure.structureType == STRUCTURE_STORAGE &&
