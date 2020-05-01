@@ -143,7 +143,7 @@ findRepair = function(creep, additionalFilter = (structure => true)) {
 
 builderRepairFilter = function(creep) {
     return (structure => (creep.pos.inRangeTo(structure, 15) ||
-                          (creep.timeToLive > 200 &&
+                          (creep.timeToLive > 500 &&
                            creep.store.getFreeCapacity() == 0)));
 }
             
