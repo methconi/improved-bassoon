@@ -259,7 +259,7 @@ remoteCarrierMeasure = function(creep) {
             if (!target) { target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure => structure.structureType == STRUCTURE_STORAGE) }); }
             if (!target) { target = spawn; }
-            creep.memory["target"] = targe.idt;
+            creep.memory["target"] = target.id;
                 
             if (!creep.pos.inRangeTo(target, 1)) {
                 creep.moveTo(target);
