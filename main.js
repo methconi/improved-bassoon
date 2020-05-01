@@ -105,6 +105,12 @@ findEnergy = function(creep, opts = {}) {
                        (target.store && target.store[RESOURCE_ENERGY] > 0))) {
             return target;
         }
+        if (target && creep.memory["energyHope"] > 0 &&
+            creep.pos.findClosestByRange(FIND_SOURCE, {
+                filter: source => (creep.pos.inRangeTo(source, 3)
+                                   && source.energy > 0) })) {
+            creep.memory["energyHope"] -= 1;
+        }
     }
     var target;
     
@@ -133,6 +139,7 @@ findEnergy = function(creep, opts = {}) {
     }
         
     if (target) {
+        creep.memory["energyHope"] = 2;
         creep.memory["target"] = target.id;
         return target;
     } else {
