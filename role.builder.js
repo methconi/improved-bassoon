@@ -103,10 +103,20 @@ findRepair = function(creep, additionalFilter = (structure => true)) {
         target = Game.getObjectById(creep.memory["target"]);
         if (target && target.hits < targetHits(target)) { return target; }
     }
-    var filter = object => object.hits < (targetHits(object) / 2) &&
-        object.structureType != STRUCTURE_ROAD &&
-        additionalFilter(object);
-    target = creep.pos.findClosestByRange(FIND_STRUCTURES, { filter: filter });
+    target = null;
+    var filter;
+
+    if (!target) {
+        filter = object => object.hits == 1 &&
+            additionalFilter(object);
+        target = creep.pos.findClosestByRange(FIND_STRUCTURES, { filter: filter });
+    }
+    if (!target) {
+        filter = object => object.hits < (targetHits(object) / 2) &&
+            object.structureType != STRUCTURE_ROAD &&
+            additionalFilter(object);
+        target = creep.pos.findClosestByRange(FIND_STRUCTURES, { filter: filter });
+    }
     if (!target) {
         filter = object => object.hits < targetHits(object) &&
             object.structureType != STRUCTURE_ROAD &&
