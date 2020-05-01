@@ -75,11 +75,30 @@ findSpawnOrExtension = function(creep) {
             return target;
         }
     }
-    var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-        filter: object => (object.structureType == STRUCTURE_SPAWN ||
-                           object.structureType == STRUCTURE_EXTENSION ||
-                           object.structureType == STRUCTURE_TOWER)
-            && object.store.getFreeCapacity(RESOURCE_ENERGY) > 0});
+    var target = null;
+    var filter;
+
+    if (!target) {
+        filter = object => (object.structureType == STRUCTURE_SPAWN ||
+                            object.structureType == STRUCTURE_EXTENSION)
+            && object.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+        target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+            filter: filter });
+    }
+    if (!target) {
+        filter = object => object.structureType == STRUCTURE_TOWER
+            && (object.store.getFreeCapacity(RESOURCE_ENERGY) >
+                object.store.getCapacity(RESOURCE_ENERGY) / 2);
+        target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+            filter: filter });
+    }
+    if (!target) {
+        filter = object => object.structureType == STRUCTURE_TOWER
+            && object.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+        target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+            filter: filter });
+    }
+    
     if (target) {
         creep.memory["target"] = target.id;
         return target;
