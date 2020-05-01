@@ -8,9 +8,10 @@ var roleRemoteCarrier = {
             remoteCarrierMeasure(creep);
             return;
         }
-        
+
+        var spawn = Game.spawns[creep.memory["spawn"]];
         var remoteRoomName = creep.memory["remoteRoom"];
-        var homeRoomName = Game.spawns[creep.memory["spawn"]].room.name;
+        var homeRoomName = spawn.room.name;
 
         if ((creep.memory["mode"] == "pickup" || creep.memory["idle"]) && creep.store[RESOURCE_ENERGY] > 0) {
             if (!creep.pos.inRangeTo(Game.spawns[creep.memory["spawn"]], 5)) {
@@ -90,9 +91,10 @@ var roleRemoteCarrier = {
         
         if (creep.memory["mode"] == "goingHome") {
             if (creep.room.name != homeRoomName) {
-                var exitDir = creep.room.findExitTo(homeRoomName);
+                /*var exitDir = creep.room.findExitTo(homeRoomName);
                 var exit = creep.pos.findClosestByRange(exitDir);
-                creep.moveTo(exit);
+                creep.moveTo(exit);*/
+                creep.moveTo(spawn);
                 return;
             } else {
                 creep.memory["mode"] = "store";
@@ -246,10 +248,11 @@ remoteCarrierMeasure = function(creep) {
             }
         }
         
-        if (creep.room.name != homeRoomName) {
+        if (creep.room.name != homeRoomName) {/*
             var exitDir = creep.room.findExitTo(homeRoomName);
             var exit = creep.pos.findClosestByRange(exitDir);
-            creep.moveTo(exit);
+            creep.moveTo(exit);*/
+            creep.moveTo(spawn);
             return;
         } else {
             var target = creep.memory["target"];
