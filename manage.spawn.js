@@ -77,12 +77,13 @@ targetCreeps = function(spawn) {
               mem: { onlyUpgrade: true } },
             { name: "Upgrader_1", body: bodyUpgrader, role: "upgrader" },
             { name: "Builder_1", body: bodyBuilder, role: "builder" },
-            { name: "Carrier_3", body: bodyCarrier, role: "carrier",
-              mem: { onlyUpgrade: true } },
             { name: "Upgrader_2", body: bodyUpgrader, role: "upgrader" },
             
             { name: "Upgrader_3", body: bodyUpgrader, role: "upgrader",
               condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 14)},
+            { name: "Carrier_3", body: bodyCarrier, role: "carrier",
+              condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 14),
+              mem: { onlyUpgrade: true } },
             { name: "Upgrader_4", body: bodyUpgrader, role: "upgrader",
               condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 21)},
             
@@ -161,9 +162,9 @@ targetCreeps = function(spawn) {
             { name: "Upgrader_1", body: bodyUpgrader, role: "upgrader" },
             { name: "Builder_1", body: bodyBuilder, role: "builder" },
             { name: "Carrier_3", body: bodyCarrier, role: "carrier" },
-            { name: "Upgrader_2", body: bodyUpgrader, role: "upgrader" },
+            { name: "Upgrader_2", body: bodyUpgrader, role: "upgrader" }/*,
             { name: "Carrier_4", body: bodyCarrier, role: "carrier" },
-            { name: "Builder_2", body: bodyBuilder, role: "builder" } ];
+            { name: "Builder_2", body: bodyBuilder, role: "builder" }*/ ];
     } else if (extensions >= 5) {
         // Budget: 550
         // per tick: 0.37
