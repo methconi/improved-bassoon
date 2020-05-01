@@ -99,7 +99,7 @@ findBuild = function(creep) {
 
 findRepair = function(creep, additionalFilter = (structure => true)) {
     var target;
-    if (creep.memory["target"]) {
+    if (creep.memory && creep.memory["target"]) {
         target = Game.getObjectById(creep.memory["target"]);
         if (target && target.hits < targetHits(target)) { return target; }
     }
