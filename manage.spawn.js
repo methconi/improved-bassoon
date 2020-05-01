@@ -451,10 +451,12 @@ energyAvailableForUpgrade = function(spawn, time="") {
     if (!energyUse["remoteBuild"]) { energyUse["remoteBuild"] = 0; }
     if (!energyUse["repair"]) { energyUse["repair"] = 0; }
     if (!energyUse["remoteRepair"]) { energyUse["remoteRepair"] = 0; }
+    if (!energyUse["wallUp"]) { energyUse["wallUp"] = 0; }
     return (energyUse["harvested"]+energyUse["remoteHarvested"]
             -energyUse["spawn"]
             -energyUse["build"]-energyUse["remoteBuild"]
-            -energyUse["repair"]-energyUse["remoteRepair"]);
+            -energyUse["repair"]-energyUse["remoteRepair"]
+            -energyUse["wallUp"]);
 }
 
 remoteCarryNeeded = function(spawn, remoteRoomIndex) {

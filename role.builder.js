@@ -20,7 +20,7 @@ var roleBuilder = {
                 builderChooseNonPickupMode(creep);
             }            
         } if (creep.memory["mode"] == "build") {
-            var target = findBuild(creep);
+            var target = findBuild(creep, builderBuildFilter);
             if(target) {
                 var res = creep.build(target)
                 if(res == ERR_NOT_IN_RANGE) {
@@ -58,7 +58,7 @@ builderChooseNonPickupMode = function(creep) {
     creep.memory["target"] = null;
     var target;
     if (Math.random() < 0.9) {
-        target = findBuild(creep);
+        target = findBuild(creep, builderBuildFilter);
         if (target) {
             creep.memory["mode"] = "build";
         } else {
@@ -72,22 +72,24 @@ builderChooseNonPickupMode = function(creep) {
         if (target) {
             creep.memory["mode"] = "repair";
         } else {
-            findBuild(creep);
+            findBuild(creep, builderBuildFilter);
             creep.memory["mode"] = "build";
         }
     }
 }
 
-findBuild = function(creep) {
+findBuild = function(creep, additionalFilter = (site => true)) {
     var target;
     if (creep.memory["target"]) {
         target = Game.getObjectById(creep.memory["target"]);
         if (target) { return target; }
     }
-    var filter = site => site.structureType == STRUCTURE_ROAD;
+    var filter = (site => site.structureType == STRUCTURE_ROAD
+                  && additionalFilter(site));
     target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES, { filter: filter });
-    if (!target) { 
-        target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
+    if (!target) {
+        filter = affitionalFilter;
+        target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES, { filter: filter });
     }
     if (target) {
         creep.memory["target"] = target.id;
@@ -144,7 +146,13 @@ findRepair = function(creep, additionalFilter = (structure => true)) {
 builderRepairFilter = function(creep) {
     return (structure => (creep.pos.inRangeTo(structure, 15) ||
                           (creep.timeToLive > 500 &&
-                           creep.store.getFreeCapacity() == 0)));
+                           creep.store.getFreeCapacity(RESOURCE_ENERGY) == 0)));
+}
+
+builderBuildFilter = function(creep) {
+    return (site => (creep.pos.inRangeTo(site, 10) ||
+                          (creep.timeToLive > 200 &&
+                           creep.store[RESOURCE_ENERGY] >= 0.8*creep.store.getCapacity(RESOURCE_ENERGY)));
 }
             
 
