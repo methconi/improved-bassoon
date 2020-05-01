@@ -152,7 +152,7 @@ builderRepairFilter = function(creep) {
 builderBuildFilter = function(creep) {
     return (site => (creep.pos.inRangeTo(site, 10) ||
                           (creep.timeToLive > 200 &&
-                           creep.store[RESOURCE_ENERGY] >= 0.8*creep.store.getCapacity(RESOURCE_ENERGY)));
+                           creep.store[RESOURCE_ENERGY] >= 0.8*creep.store.getCapacity(RESOURCE_ENERGY))));
 }
             
 
