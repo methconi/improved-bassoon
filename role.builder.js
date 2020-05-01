@@ -26,21 +26,20 @@ var roleBuilder = {
                 if(res == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target);
                 } else if (res == OK) {
-                    creepRecordEnergyUse(creep, "build")
+                    creepRecordEnergyUse(creep, "build");
                 }
             } else {
                 builderChooseNonPickupMode(creep);
             }
         } if (creep.memory["mode"] == "repair") {
-            var filter = (structure =>
-                          structure.structureType != STRUCTURE_WALL);
+            var filter = builderRepairFilter();
             var target = findRepair(creep, filter);
             if(target) {
                 var res = creep.repair(target)
                 if(res == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target);
                 } else if (res == OK) {
-                    creepRecordEnergyUse(creep, "repair")
+                    creepRecordEnergyUse(creep, "repair");
                 }
             } else {
                 builderChooseNonPickupMode(creep);
@@ -63,14 +62,12 @@ builderChooseNonPickupMode = function(creep) {
         if (target) {
             creep.memory["mode"] = "build";
         } else {
-            var filter = (structure =>
-                          structure.structureType != STRUCTURE_WALL);
+            var filter = builderRepairFilter();
             findRepair(creep, filter);
             creep.memory["mode"] = "repair";
         }
     } else {
-        var filter = (structure =>
-                      structure.structureType != STRUCTURE_WALL);
+        var filter = builderRepairFilter();
         target = findRepair(creep, filter);
         if (target) {
             creep.memory["mode"] = "repair";
@@ -104,25 +101,25 @@ findRepair = function(creep, additionalFilter = (structure => true)) {
     var target;
     if (creep.memory["target"]) {
         target = Game.getObjectById(creep.memory["target"]);
-        if (target && target.hits < target.hitsMax) { return target; }
+        if (target && target.hits < targetHits(target)) { return target; }
     }
-    var filter = object => object.hits < (object.hitsMax / 2) &&
+    var filter = object => object.hits < (targetHits(object) / 2) &&
         object.structureType != STRUCTURE_ROAD &&
         additionalFilter(object);
     target = creep.pos.findClosestByRange(FIND_STRUCTURES, { filter: filter });
     if (!target) {
-        filter = object => object.hits < object.hitsMax &&
+        filter = object => object.hits < targetHits(object) &&
             object.structureType != STRUCTURE_ROAD &&
             additionalFilter(object);
         target = creep.pos.findClosestByRange(FIND_STRUCTURES, { filter: filter });
     }
     if (!target) {
-        filter = object => object.hits < (object.hitsMax / 2) &&
+        filter = object => object.hits < (targetHits(object) / 2) &&
             additionalFilter(object);
         target = creep.pos.findClosestByRange(FIND_STRUCTURES, { filter: filter });
     }
     if (!target) {
-        filter = object => object.hits < object.hitsMax &&
+        filter = object => object.hits < targetHits(object) &&
             additionalFilter(object);
         target = creep.pos.findClosestByRange(FIND_STRUCTURES, { filter: filter });
     }
@@ -133,5 +130,10 @@ findRepair = function(creep, additionalFilter = (structure => true)) {
     creep.memory["target"] = null;
     return null;
 }
+
+builderRepairFilter = function() {
+    return (structure => true);
+}
+            
 
 module.exports = roleBuilder;

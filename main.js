@@ -191,3 +191,12 @@ clearRoad = function(creep) {
         }
     }
 }        
+
+targetHits = function(object) {
+    if (object.structureType == STRUCTURE_WALL ||
+        object.structureType == STRUCTURE_RAMPART) {
+        return 30000;
+    } else {
+        return target.maxHits;
+    }
+}
