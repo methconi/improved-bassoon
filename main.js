@@ -207,7 +207,7 @@ targetHits = function(object) {
         object.structureType == STRUCTURE_RAMPART) {
         return 30000;
     } else {
-        return object.maxHits;
+        return object.hitsMax;
     }
 }
 
