@@ -88,13 +88,14 @@ findSpawnOrExtension = function(creep) {
     if (!target) {
         filter = object => object.structureType == STRUCTURE_TOWER
             && (object.store.getFreeCapacity(RESOURCE_ENERGY) >
-                object.store.getCapacity(RESOURCE_ENERGY) / 2);
+                object.store.getCapacity(RESOURCE_ENERGY) * 0.5);
         target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: filter });
     }
     if (!target) {
         filter = object => object.structureType == STRUCTURE_TOWER
-            && object.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+            && (object.store.getFreeCapacity(RESOURCE_ENERGY) >
+                object.store.getCapacity(RESOURCE_ENERGY) * 0.8;
         target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: filter });
     }
