@@ -101,7 +101,8 @@ var roleRemoteCarrier = {
                 var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: structure => (structure.structureType == STRUCTURE_STORAGE &&
                                           structure.store.getFreeCapacity() > 0) });
-                creep.memory["target"] = target.id;
+                if (target) { creep.memory["target"] = target.id; }
+                else { creep.memory["target"] = null; }
                 creep.moveTo(creep.room.controller);
                 return;
             }
