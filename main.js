@@ -110,6 +110,7 @@ findEnergy = function(creep, opts = {}) {
                 filter: source => (creep.pos.inRangeTo(source, 3)
                                    && source.energy > 0) })) {
             creep.memory["energyHope"] -= 1;
+            return target;
         }
     }
     var target;
