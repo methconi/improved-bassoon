@@ -124,10 +124,10 @@ findRepair = function(creep, additionalFilter = (structure => true)) {
         target = creep.pos.findClosestByRange(FIND_STRUCTURES, { filter: filter });
     }
     if (target) {
-        creep.memory["target"] = target.id;
+        if (creep.memory) { creep.memory["target"] = target.id; }
         return target;
     }
-    creep.memory["target"] = null;
+    if (creep.memory) { creep.memory["target"] = null; }
     return null;
 }
 
