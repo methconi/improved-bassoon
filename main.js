@@ -200,3 +200,10 @@ targetHits = function(object) {
         return object.maxHits;
     }
 }
+
+addMemory = function(object) {
+    if (object.memory) { return; }
+    if (!Memory["objects"]) { Memory["objects"] = {}; }
+    if (!Memory["objects"][object.id]) { Memory["objects"][object.id] = {}; }
+    object["memory"] = Memory["objects"][object.id];
+}
