@@ -95,7 +95,7 @@ findSpawnOrExtension = function(creep) {
     if (!target) {
         filter = object => object.structureType == STRUCTURE_TOWER
             && (object.store.getFreeCapacity(RESOURCE_ENERGY) >
-                object.store.getCapacity(RESOURCE_ENERGY) * 0.8;
+                object.store.getCapacity(RESOURCE_ENERGY) * 0.2);
         target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: filter });
     }
