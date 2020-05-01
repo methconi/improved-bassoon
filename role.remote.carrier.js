@@ -255,11 +255,11 @@ remoteCarrierMeasure = function(creep) {
             creep.moveTo(spawn);
             return;
         } else {
-            var target = creep.memory["target"];
+            var target = Game.getObjectById(creep.memory["target"]);
             if (!target) { target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure => structure.structureType == STRUCTURE_STORAGE) }); }
             if (!target) { target = spawn; }
-            creep.memory["target"] = target;
+            creep.memory["target"] = targe.idt;
                 
             if (!creep.pos.inRangeTo(target, 1)) {
                 creep.moveTo(target);
