@@ -141,6 +141,7 @@ findEnergy = function(creep, opts = {}) {
         
     if (target) {
         creep.memory["target"] = target.id;
+        console.log(creep.name + " " + target.id);
         return target;
     } else {
         creep.memory["target"] = null;
