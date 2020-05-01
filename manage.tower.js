@@ -22,11 +22,12 @@ var manageTower = {
         if (spawnName) {
             spawn = Game.spawns[spawnName];
         }
+        
         if (spawn && spawn.memory["energyUse"]
             && !(spawn.memory["energyUse"]["wallUp"] > 0.5)
             && (tower.store[RESOURCE_ENERGY] >=
                 tower.store.getCapacity(RESOURCE_ENERGY) * 0.75)) {
-            var targets = creep.room.find(FIND_STRUCTURES, {
+            var targets = tower.room.find(FIND_STRUCTURES, {
                 filter: structure =>
                     (structure.hits < structure.hitsMax &&
                      (structure.structureType == STRUCTURE_WALL ||
