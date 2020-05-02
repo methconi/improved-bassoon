@@ -79,17 +79,17 @@ targetCreeps = function(spawn) {
               condition: builderNeeded },
             
             { name: "Upgrader_2", body: bodyUpgrader, role: "upgrader",
-              condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 7) },
+              condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 8) },
             { name: "Carrier_2", body: bodyCarrier, role: "carrier",
-              condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 7),
+              condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 8),
               mem: { onlyUpgrade: true } },
             
             { name: "Upgrader_3", body: bodyUpgrader, role: "upgrader",
-              condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 14)},
+              condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 15)},
             { name: "Upgrader_4", body: bodyUpgrader, role: "upgrader",
-              condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 21)},
+              condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 22)},
             { name: "Carrier_3", body: bodyCarrier, role: "carrier",
-              condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 21),
+              condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 22),
               mem: { onlyUpgrade: true } },
             
             { name: "Remote_Claimer_1", body: bodyRemoteClaimer, role: "remoteClaimer", remoteClaim: true },
@@ -103,9 +103,9 @@ targetCreeps = function(spawn) {
             { name: "Remote_Harvester_2", body: bodyRemoteHarvester, role: "remoteHarvester",
               remote: true, remoteIndex: 0, source: 1 },
             { name: "Remote_Carrier_2", body: bodyRemoteCarrier, role: "remoteCarrier",
-              remote: true, remoteIndex: 0, condition: (spawn => remoteCarryNeeded(spawn, 0) > 14) },
+              remote: true, remoteIndex: 0, condition: (spawn => remoteCarryNeeded(spawn, 0) > 15) },
             { name: "Remote_Carrier_3", body: bodyRemoteCarrier, role: "remoteCarrier",
-              remote: true, remoteIndex: 0, condition: (spawn => remoteCarryNeeded(spawn, 0) > 28)  },
+              remote: true, remoteIndex: 0, condition: (spawn => remoteCarryNeeded(spawn, 0) > 29)  },
 
             
             { name: "Remote_Harvester_2_1", body: bodyRemoteHarvester, role: "remoteHarvester",
@@ -115,9 +115,9 @@ targetCreeps = function(spawn) {
             { name: "Remote_Harvester_2_2", body: bodyRemoteHarvester, role: "remoteHarvester",
               remote: true, remoteIndex: 1, source: 1 },
             { name: "Remote_Carrier_2_2", body: bodyRemoteCarrier, role: "remoteCarrier",
-              remote: true, remoteIndex: 1, condition: (spawn => remoteCarryNeeded(spawn, 1) > 14) },
+              remote: true, remoteIndex: 1, condition: (spawn => remoteCarryNeeded(spawn, 1) > 15) },
             { name: "Remote_Carrier_2_3", body: bodyRemoteCarrier, role: "remoteCarrier",
-              remote: true, remoteIndex: 1, condition: (spawn => remoteCarryNeeded(spawn, 1) > 28) },
+              remote: true, remoteIndex: 1, condition: (spawn => remoteCarryNeeded(spawn, 1) > 29) },
             
             { name: "Remote_Harvester_3_1", body: bodyRemoteHarvester, role: "remoteHarvester",
               remote: true, remoteIndex: 2, source: 0 },
@@ -126,9 +126,9 @@ targetCreeps = function(spawn) {
             { name: "Remote_Harvester_3_2", body: bodyRemoteHarvester, role: "remoteHarvester",
               remote: true, remoteIndex: 2, source: 1 },
             { name: "Remote_Carrier_3_2", body: bodyRemoteCarrier, role: "remoteCarrier",
-              remote: true, remoteIndex: 2, condition: (spawn => remoteCarryNeeded(spawn, 2) > 14) },
+              remote: true, remoteIndex: 2, condition: (spawn => remoteCarryNeeded(spawn, 2) > 15) },
             { name: "Remote_Carrier_3_3", body: bodyRemoteCarrier, role: "remoteCarrier",
-              remote: true, remoteIndex: 2, condition: (spawn => remoteCarryNeeded(spawn, 2) > 28)  },
+              remote: true, remoteIndex: 2, condition: (spawn => remoteCarryNeeded(spawn, 2) > 29)  },
             
             { name: "Remote_Harvester_4_1", body: bodyRemoteHarvester, role: "remoteHarvester",
               remote: true, remoteIndex: 3, source: 0 },
@@ -137,9 +137,9 @@ targetCreeps = function(spawn) {
             { name: "Remote_Harvester_4_2", body: bodyRemoteHarvester, role: "remoteHarvester",
               remote: true, remoteIndex: 3, source: 1 },
             { name: "Remote_Carrier_4_2", body: bodyRemoteCarrier, role: "remoteCarrier",
-              remote: true, remoteIndex: 3, condition: (spawn => remoteCarryNeeded(spawn, 3) > 14) },
+              remote: true, remoteIndex: 3, condition: (spawn => remoteCarryNeeded(spawn, 3) > 15) },
             { name: "Remote_Carrier_4_3", body: bodyRemoteCarrier, role: "remoteCarrier",
-              remote: true, remoteIndex: 3, condition: (spawn => remoteCarryNeeded(spawn, 3) > 28)  }
+              remote: true, remoteIndex: 3, condition: (spawn => remoteCarryNeeded(spawn, 3) > 29)  }
 
         ];
     } else if (extensions >= 10) {
@@ -169,9 +169,9 @@ targetCreeps = function(spawn) {
             /*{ name: "Carrier_3", body: bodyCarrier, role: "carrier",
               mem: { onlyUpgrade: true }},*/
             { name: "Upgrader_2", body: bodyUpgrader, role: "upgrader",
-              condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 7) },
+              condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 8) },
             { name: "Upgrader_3", body: bodyUpgrader, role: "upgrader",
-              condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 14) }/*,
+              condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 15) }/*,
             { name: "Carrier_4", body: bodyCarrier, role: "carrier" },
             { name: "Builder_2", body: bodyBuilder, role: "builder" }*/ ];
     } else if (extensions >= 5) {
