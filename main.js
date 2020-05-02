@@ -132,7 +132,8 @@ findEnergy = function(creep, opts = {}) {
              target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: structure => (structure.structureType == STRUCTURE_STORAGE &&
                                       structure.store[RESOURCE_ENERGY] >=
-                                      creep.store.getFreeCapacity(RESOURCE_ENERGY)) });
+                                      creep.store.getFreeCapacity(RESOURCE_ENERGY) &&
+                                      additionalFilter(structure)) });
         }
 
         if (!target) {
@@ -145,7 +146,8 @@ findEnergy = function(creep, opts = {}) {
         if (!target) {
             target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: structure => (structure.structureType == STRUCTURE_STORAGE &&
-                                      structure.store[RESOURCE_ENERGY] > 0) });
+                                      structure.store[RESOURCE_ENERGY] > 0 &&
+                                      additionalFilter(structure)) });
         }
     }
         
