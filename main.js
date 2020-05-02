@@ -90,7 +90,8 @@ findEnergy = function(creep, opts = {}) {
     } else {
         additionalFilter = (resource => true)
     }
-    var avoidStorageLevel; // 0: treat storage and non-storage equally
+    var avoidStorageLevel; // -1: prefer storage
+                           // 0: treat storage and non-storage equally
                            // 1: prefer faraway well-filled non-storage over any nearby storage
                            // 2: prefer any non-storage over any storage
     if ((typeof opts.avoidStorageLevel) == "number") {
@@ -113,7 +114,7 @@ findEnergy = function(creep, opts = {}) {
             return target;
         }
     }
-    var target;
+    var target = null;
     
     var upgrader = creep.memory["role"] == "upgrader";
     var controller = creep.room.controller;
@@ -127,15 +128,24 @@ findEnergy = function(creep, opts = {}) {
     if (tombstone) {
         target = tombstone;
     } else {
-        target = closestEnergyOrContainer(creep, additionalFilter, (avoidStorageLevel >= 1),
-                                          creep.store.getFreeCapacity(RESOURCE_ENERGY));
+        if (avoidStorageLevel < 0) {
+             target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                filter: structure => (structure.structureType == STRUCTURE_STORAGE &&
+                                      structure.store[RESOURCE_ENERGY] >=
+                                      creep.store.getFreeCapacity(RESOURCE_ENERGY)) });
+        }
+
+        if (!target) {
+            target = closestEnergyOrContainer(creep, additionalFilter, (avoidStorageLevel >= 1),
+                                              creep.store.getFreeCapacity(RESOURCE_ENERGY));
+        }
         if (!target) {
             target = closestEnergyOrContainer(creep, additionalFilter, (avoidStorageLevel >= 2), 1);
         }
         if (!target) {
-            creep.pos.findClosestByRange(FIND_STRUCTURES, {
+            target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: structure => (structure.structureType == STRUCTURE_STORAGE &&
-                                      structure.store.getFreeCapacity() > 0) });
+                                      structure.store[RESOURCE_ENERGY] > 0) });
         }
     }
         

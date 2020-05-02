@@ -11,13 +11,13 @@ var roleCarrier = {
         }
 
         if (creep.memory["mode"] == "pickup") {
-            /*var opts = {};
+            var opts = {};
             if (creep.memory["onlyUpgrade"]) {
-                opts.avoidStorageLevel = 1;
+                opts.avoidStorageLevel = -1;
             } else {
-                opts.avoidStorageLevel = 2;
-            }**/
-            var target = findEnergy(creep/*, opts*/);
+                opts.avoidStorageLevel = 1;
+            }
+            var target = findEnergy(creep, opts);
             if (target) {
                 var res = takeEnergy(creep, target);
                 if (res == ERR_NOT_IN_RANGE) {
