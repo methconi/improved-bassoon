@@ -10,7 +10,7 @@ var roleBuilder = {
 
 
         if (creep.memory["mode"] == "pickup") {
-            var target = findEnergy(creep);
+            var target = findEnergy(creep, { avoidStorageLevel: 0 });
             if (target) {
                 var res = takeEnergy(creep, target);
                 if (res == ERR_NOT_IN_RANGE) {
