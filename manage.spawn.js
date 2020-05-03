@@ -61,15 +61,18 @@ targetCreeps = function(spawn) {
                                     MOVE, MOVE, MOVE, MOVE,
                                     CARRY ];
         var bodyRemoteHarvester2 = [ WORK, WORK, WORK,
-                               WORK, WORK, WORK,
-                               WORK, 
-                               MOVE, MOVE, MOVE,
-                               CARRY, CARRY ];
+                                     WORK, WORK, WORK,
+                                     WORK, 
+                                     MOVE, MOVE, MOVE,
+                                     CARRY, CARRY ];
         var bodyRemoteCarrier = [ MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, // 0.7
                                   CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
                                   CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY ];
         var bodyRemoteFighter = [ MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE,
                                   ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK ];
+        var bodyRemoteRangedFighter = [ MOVE, MOVE, MOVE, MOVE, MOVE,
+                                        RANGED_ATTACK, RANGED_ATTACK, RANGED_ATTACK,
+                                        RANGED_ATTACK, RANGED_ATTACK ];
         var bodyRemoteClaimer = [ MOVE, MOVE, CLAIM ];
         return [
             { name: "Remote_Fighter_1", body: bodyRemoteFighter, role: "remoteFighter", remoteWar: true },

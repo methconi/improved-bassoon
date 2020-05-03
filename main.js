@@ -7,6 +7,7 @@ var manageSpawn = require('manage.spawn');
 var manageTower = require('manage.tower');
 
 var roleRemoteFighter = require('role.remote.fighter');
+var roleRemoteRangedFighter = require('role.remote.rangedFighter');
 var roleRemoteClaimer = require('role.remote.claimer');
 var roleRemoteHarvester = require('role.remote.harvester');
 var roleRemoteCarrier = require('role.remote.carrier');
@@ -46,6 +47,8 @@ module.exports.loop = function () {
             roleCarrier.run(creep);
         } else if(creep.memory.role == 'remoteFighter') {
             roleRemoteFighter.run(creep);
+        } else if(creep.memory.role == 'remoteRangedFighter') {
+            roleRemoteRangedFighter.run(creep);
         } else if(creep.memory.role == 'remoteClaimer') {
             roleRemoteClaimer.run(creep);
         } else if(creep.memory.role == 'remoteHarvester') {
@@ -237,3 +240,18 @@ addMemory = function(object) {
     if (!Memory["objects"][object.id]) { Memory["objects"][object.id] = {}; }
     object["memory"] = Memory["objects"][object.id];
 }
+
+/* // Need general rotation instead
+oppositeDirection = function(direction) {
+    switch (direction) {
+    case TOP: return BOTTOM;
+    case TOP_RIGHT: return BOTTOM_LEFT;
+    case RIGHT: return LEFT;
+    case BOTTOM_RIGHT: return TOP_LEFT;
+    case BOTTOM: return TOP;
+    case BOTTOM_LEFT: return TOP_RIGHT;
+    case LEFT: return RIGHT;
+    case TOP_LEFT: return BOTTOM_RIGHT;
+    }
+}
+*/
