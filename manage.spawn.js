@@ -537,7 +537,7 @@ hasTower = function(spawn) {
 spawnOwnsRoomIndex = function(spawn, index) {
     var roomName;
     var roomMemory;
-    if (!(spawn.memory["remoteRooms"] && spawns.memory["remoteRooms"][index] &&)) { return false; }
+    if (!(spawn.memory["remoteRooms"] && spawns.memory["remoteRooms"][index])) { return false; }
     roomName = spawn.memory["remoteRooms"] && spawns.memory["remoteRooms"][index];
     if (!(spawn.memory["remoteRoomsData"] && spawn.memory["remoteRoomsData"][roomName])) { return false; }
     roomMemory = spawn.memory["remoteRoomsData"][roomName];
