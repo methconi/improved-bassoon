@@ -7,7 +7,7 @@ var roleRemoteRangedFighter = {
             var res = creep.rangedAttack(target);
             if (res == ERR_NOT_IN_RANGE) {
                 creep.moveTo(target);
-            } else if {res == OK) {
+            } else if (res == OK) {
                 // Shit-grade kiting
                 creep.move(target.pos.getDirectionTo(creep));
             }
