@@ -75,9 +75,18 @@ findSpawnOrExtension = function(creep) {
             return target;
         }
     }
+    var spawn = Game.spawns[creep.memory["spawn"]];
     var target = null;
     var filter;
 
+    if (!target && spawn.memory["energyUse"]["repair"] <= 1.5) {
+        filter = object => object.structureType == STRUCTURE_TOWER
+            && (object.store.getFreeCapacity(RESOURCE_ENERGY) >
+                object.store.getCapacity(RESOURCE_ENERGY) * 0.5);
+        target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+            filter: filter });
+    }
+    
     if (!target) {
         filter = object => (object.structureType == STRUCTURE_SPAWN ||
                             object.structureType == STRUCTURE_EXTENSION)
@@ -85,13 +94,7 @@ findSpawnOrExtension = function(creep) {
         target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: filter });
     }
-    if (!target) {
-        filter = object => object.structureType == STRUCTURE_TOWER
-            && (object.store.getFreeCapacity(RESOURCE_ENERGY) >
-                object.store.getCapacity(RESOURCE_ENERGY) * 0.5);
-        target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-            filter: filter });
-    }
+    
     if (!target) {
         filter = object => object.structureType == STRUCTURE_TOWER
             && (object.store.getFreeCapacity(RESOURCE_ENERGY) >

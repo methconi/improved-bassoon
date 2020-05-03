@@ -28,6 +28,14 @@ var roleRemoteClaimer = {
             }
             return;
         }
+
+        if (controller && !controller.my) {
+            var res = creep.claimController(controller);
+            if (res == ERR_NOT_IN_RANGE) {
+                creep.moveTo(controller);
+            }
+            return;
+        }
     }
     
 };
