@@ -542,7 +542,7 @@ spawnOwnsRoomIndex = function(spawn, index) {
     if (!(spawn.memory["remoteRoomsData"] && spawn.memory["remoteRoomsData"][roomName])) { return false; }
     roomMemory = spawn.memory["remoteRoomsData"][roomName];
     
-    return !!roomMemory["owned"]
+    return !!roomMemory["controlled"]
 }
 
 
