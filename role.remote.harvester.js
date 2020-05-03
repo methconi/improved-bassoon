@@ -59,7 +59,7 @@ buildOrDrop = function(creep) {
     target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
         filter: structure => (structure.structureType == STRUCTURE_SPAWN
                               && creep.pos.inRangeTo(structure, 5)
-                              && struture.store.getFreeCapacity(RESOURCE_ENERGY) > 0)});
+                              && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0)});
     if (target) {
         var res = creep.transfer(target, RESOURCE_ENERGY);
         if(res == ERR_NOT_IN_RANGE) {
