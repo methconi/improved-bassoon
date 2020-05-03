@@ -97,11 +97,19 @@ targetCreeps = function(spawn) {
             // Cost: 2.97, max production: 9 -> max gain 6.03/tick/remote room
             // Cost w/ upgrader: 3.67 -> max 6.33/tick upgrade gain/room
             { name: "Remote_Harvester_1", body: bodyRemoteHarvester, role: "remoteHarvester",
-              remote: true, remoteIndex: 0, source: 0 },
+              remote: true, remoteIndex: 0, source: 0,
+              condition: (spawn => !spawnOwnsRoomIndex(spawn, 0)) },
+            { name: "Remote_Harvester_1", body: bodyHarvester, role: "remoteHarvester",
+              remote: true, remoteIndex: 0, source: 0,
+              condition: (spawn => spawnOwnsRoomIndex(spawn, 0)) },
             { name: "Remote_Carrier_1", body: bodyRemoteCarrier, role: "remoteCarrier",
               remote: true, remoteIndex: 0 },
             { name: "Remote_Harvester_2", body: bodyRemoteHarvester, role: "remoteHarvester",
-              remote: true, remoteIndex: 0, source: 1 },
+              remote: true, remoteIndex: 0, source: 1,
+              condition: (spawn => !spawnOwnsRoomIndex(spawn, 0)) },
+            { name: "Remote_Harvester_2", body: bodyHarvester, role: "remoteHarvester",
+              remote: true, remoteIndex: 0, source: 1,
+              condition: (spawn => spawnOwnsRoomIndex(spawn, 0)) },
             { name: "Remote_Carrier_2", body: bodyRemoteCarrier, role: "remoteCarrier",
               remote: true, remoteIndex: 0, condition: (spawn => remoteCarryNeeded(spawn, 0) > 15) },
             { name: "Remote_Carrier_3", body: bodyRemoteCarrier, role: "remoteCarrier",
@@ -525,5 +533,17 @@ hasTower = function(spawn) {
     }
     return spawn.hasTower;
 }
+
+spawnOwnsRoomIndex = function(spawn, index) {
+    var roomName;
+    var roomMemory;
+    if (!(spawn.memory["remoteRooms"] && spawns.memory["remoteRooms"][index] &&)) { return false; }
+    roomName = spawn.memory["remoteRooms"] && spawns.memory["remoteRooms"][index];
+    if (!(spawn.memory["remoteRoomsData"] && spawn.memory["remoteRoomsData"][roomName])) { return false; }
+    roomMemory = spawn.memory["remoteRoomsData"][roomName];
+    
+    return !!roomMemory["owned"]
+}
+
 
 module.exports = manageSpawn;

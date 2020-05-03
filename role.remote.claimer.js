@@ -33,6 +33,9 @@ var roleRemoteClaimer = {
             var res = creep.claimController(controller);
             if (res == ERR_NOT_IN_RANGE) {
                 creep.moveTo(controller);
+            } else if (res == OK) {
+                var spawn = Game.spawns[creep.memory["spawn"]];
+                spawn.memory["remoteRoomsData"][creep.room.name]["controlled"] = true;
             }
             return;
         }
