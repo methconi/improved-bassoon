@@ -63,7 +63,7 @@ var roleRemoteCarrier = {
                 
                 if (!target) {
                     target = source.pos.findClosestByRange(FIND_STRUCTURES, {
-                        filter: structure => (structure.store &&
+                        filter: structure => (structure.structureType == STRUCTURE_CONTAINER &&
                                               structure.store[RESOURCE_ENERGY] > 0 &&
                                               structure.pos.inRangeTo(source, 5)) });
                     if (target) { take = (structure => (creep.withdraw(structure, RESOURCE_ENERGY))); }
