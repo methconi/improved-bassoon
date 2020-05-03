@@ -55,7 +55,18 @@ buildOrDrop = function(creep) {
         }
         return;
     }
-    
+
+    target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+        filter: structure => (structure.structureType == STRUCURE_SPAWN
+                              && structurecreep.pos.inRangeTo(structure, 5)
+                              && struture.store.getFreeCapacity(RESOURCE_ENERGY) > 0)});
+    if (target) {
+        var res = creep.transfer(target, RESOURCE_ENERGY);
+        if(res == ERR_NOT_IN_RANGE) {
+            creep.moveTo(target);
+        }
+        return;
+    }
     
     target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
         filter: structure => structure.structureType == STRUCTURE_CONTAINER });
