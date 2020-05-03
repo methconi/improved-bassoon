@@ -60,7 +60,7 @@ targetCreeps = function(spawn) {
         var bodyRemoteHarvester = [ WORK, WORK, WORK, WORK, // 0.43/tick
                                     MOVE, MOVE, MOVE, MOVE,
                                     CARRY ];
-        var bodyHarvester2 = [ WORK, WORK, WORK,
+        var bodyRemoteHarvester2 = [ WORK, WORK, WORK,
                                WORK, WORK, WORK,
                                WORK, 
                                MOVE, MOVE, MOVE,
