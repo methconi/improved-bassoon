@@ -3,13 +3,16 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleCarrier = require('role.carrier');
 
-var manageSpawn = require("manage.spawn");
-var manageTower = require("manage.tower");
+var manageSpawn = require('manage.spawn');
+var manageTower = require('manage.tower');
 
 var roleRemoteFighter = require('role.remote.fighter');
 var roleRemoteClaimer = require('role.remote.claimer');
 var roleRemoteHarvester = require('role.remote.harvester');
 var roleRemoteCarrier = require('role.remote.carrier');
+
+var roleAntiDowngrader = require('role.antiDowngrader');
+var manageRemoteSpawn = require('manage.remote.spawn');
 
 module.exports.loop = function () {
     maybeCleanupDeadCreepsMemory();
@@ -22,7 +25,10 @@ module.exports.loop = function () {
     }
 
     var spawn = Game.spawns["Spawn1"];
-    manageSpawn.run(spawn);
+    if (spawn) { manageSpawn.run(spawn); }
+    
+    spawn = Game.spawns["Spawn2"];
+    if (spawn) { manageRemoteSpawn.run(spawn); }
     
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
@@ -46,6 +52,8 @@ module.exports.loop = function () {
             roleRemoteHarvester.run(creep);
         } else if(creep.memory.role == 'remoteCarrier') {
             roleRemoteCarrier.run(creep);
+        } else if(creep.memory.role == 'antiDowngrader') {
+            roleAntiDowngrader.run(creep);
         }
     }
     

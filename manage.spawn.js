@@ -60,6 +60,11 @@ targetCreeps = function(spawn) {
         var bodyRemoteHarvester = [ WORK, WORK, WORK, WORK, // 0.43/tick
                                     MOVE, MOVE, MOVE, MOVE,
                                     CARRY ];
+        var bodyHarvester2 = [ WORK, WORK, WORK,
+                               WORK, WORK, WORK,
+                               WORK, 
+                               MOVE, MOVE, MOVE,
+                               CARRY, CARRY ];
         var bodyRemoteCarrier = [ MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, // 0.7
                                   CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
                                   CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY ];
@@ -99,7 +104,7 @@ targetCreeps = function(spawn) {
             { name: "Remote_Harvester_1", body: bodyRemoteHarvester, role: "remoteHarvester",
               remote: true, remoteIndex: 0, source: 0,
               condition: (spawn => !spawnOwnsRoomIndex(spawn, 0)) },
-            { name: "Remote_Harvester_1", body: bodyHarvester, role: "remoteHarvester",
+            { name: "Remote_Harvester_1", body: bodyRemoteHarvester2, role: "remoteHarvester",
               remote: true, remoteIndex: 0, source: 0,
               condition: (spawn => spawnOwnsRoomIndex(spawn, 0)) },
             { name: "Remote_Carrier_1", body: bodyRemoteCarrier, role: "remoteCarrier",
@@ -107,7 +112,7 @@ targetCreeps = function(spawn) {
             { name: "Remote_Harvester_2", body: bodyRemoteHarvester, role: "remoteHarvester",
               remote: true, remoteIndex: 0, source: 1,
               condition: (spawn => !spawnOwnsRoomIndex(spawn, 0)) },
-            { name: "Remote_Harvester_2", body: bodyHarvester, role: "remoteHarvester",
+            { name: "Remote_Harvester_2", body: bodyRemoteHarvester2, role: "remoteHarvester",
               remote: true, remoteIndex: 0, source: 1,
               condition: (spawn => spawnOwnsRoomIndex(spawn, 0)) },
             { name: "Remote_Carrier_2", body: bodyRemoteCarrier, role: "remoteCarrier",
