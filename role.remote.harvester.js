@@ -1,6 +1,8 @@
 var roleRemoteHarvester = {
     
     run: function(creep) {
+        if (clearExit(creep)) { return; }
+        
         var roomName =creep.memory["remoteRoom"];
         if (creep.room.name != roomName) {
             var exitDir = creep.room.findExitTo(roomName);
