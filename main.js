@@ -1,4 +1,5 @@
 var roleHarvester = require('role.harvester');
+var roleMineralHarvester = require('role.mineralHarvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleCarrier = require('role.carrier');
@@ -39,6 +40,8 @@ module.exports.loop = function () {
         
         if(creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
+        } else if(creep.memory.role == 'mineralHarvester') {
+            roleMineralHarvester.run(creep);
         } else if(creep.memory.role == 'upgrader') {
             roleUpgrader.run(creep);
         } else if(creep.memory.role == 'builder') {
