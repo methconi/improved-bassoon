@@ -96,9 +96,9 @@ targetCreeps = function(spawn) {
               condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 15)},
             { name: "Upgrader_4", body: bodyUpgrader, role: "upgrader",
               condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 22)},
-            { name: "Carrier_3", body: bodyCarrier, role: "carrier",
+            /*{ name: "Carrier_3", body: bodyCarrier, role: "carrier",
               condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 22),
-              mem: { onlyUpgrade: true } },
+              mem: { onlyUpgrade: true } },*/
             
             { name: "Remote_Claimer_1", body: bodyRemoteClaimer, role: "remoteClaimer", remoteClaim: true },
 
