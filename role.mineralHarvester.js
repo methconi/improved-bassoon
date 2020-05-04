@@ -28,7 +28,7 @@ var roleMineralHarvester = {
 
         if (creep.store.getFreeCapacity(mineral.mineralType) == 0) {
             creep.memory["mode"] = "store";
-        } else if (creep.store[mineral.mineralType]) {
+        } else if (creep.store[mineral.mineralType] == 0) {
             creep.memory["mode"] = "harvest";
         }
 
