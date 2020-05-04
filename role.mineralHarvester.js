@@ -11,7 +11,7 @@ var roleMineralHarvester = {
             if (!mineral) { return; }
             creep.memory["mineral"] = mineral.id
         } else {
-            mineral = getObjectById(creep.memory["mineral"]);
+            mineral = Game.getObjectById(creep.memory["mineral"]);
             if (!mineral) { return; }
         }
 
@@ -22,7 +22,7 @@ var roleMineralHarvester = {
             if (!storage) { return; }
             creep.memory["storage"] = storage.id
         } else {
-            storage = getObjectById(creep.memory["storage"]);
+            storage = Game.getObjectById(creep.memory["storage"]);
             if (!storage) { return; }
         }
 
