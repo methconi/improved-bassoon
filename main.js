@@ -262,3 +262,11 @@ hasPart = function(creep, type) {
     }
     return false;
 }
+
+clearExit = function(creep) {
+    if (creep.pos.x <= 0) { creep.move(RIGHT); return true; }
+    if (creep.pos.x >= 49) { creep.move(LEFT); return true; }
+    if (creep.pos.y <= 0) { creep.move(BOTTOM); return true; }
+    if (creep.pos.y >= 49) { creep.move(TOP); return true; }
+    return false;
+}

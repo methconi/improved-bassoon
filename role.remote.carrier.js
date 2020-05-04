@@ -33,6 +33,7 @@ var roleRemoteCarrier = {
 
         if (creep.memory["mode"] == "remotePickup") {
             if (creep.room.name != remoteRoomName) {
+                if (clearExit(creep)) { return; }
                 var exitDir = creep.room.findExitTo(remoteRoomName);
                 var exit = creep.pos.findClosestByRange(exitDir);
                 creep.moveTo(exit);
@@ -180,6 +181,7 @@ remoteCarrierMeasure = function(creep) {
         }
         
         if (creep.room.name != remoteRoomName) {
+            if (clearExit(creep)) { return; }
             var exitDir = creep.room.findExitTo(remoteRoomName);
             var exit = creep.pos.findClosestByRange(exitDir);
             creep.moveTo(exit);
