@@ -3,8 +3,8 @@ var roleMineralHarvester = {
     run: function(creep) {
 
         var spawn = Game.spawns[creep.memory["spawn"]];
-        var mineral;
-        var storage;
+        var mineral = null;
+        var storage = null;
         
         if (!creep.memory["mineral"]) {
             mineral = creep.pos.findClosestByRange(FIND_MINERALS);
@@ -16,9 +16,16 @@ var roleMineralHarvester = {
         }
 
         if (!creep.memory["storage"]) {
-            storage = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                filter: (structure => structure.structureType
-                         == STRUCTURE_STORAGE)});
+            if (spawn.memory["mineralToTerminal"]) {
+                storage = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: (structure => structure.structureType
+                             == STRUCTURE_TERMINAL)});
+            }
+            if (!storage || storage.store.getFreeCapacity(mineral.mineralType) < 10000) {
+                storage = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: (structure => structure.structureType
+                             == STRUCTURE_STORAGE)});
+            }
             if (!storage) { return; }
             creep.memory["storage"] = storage.id
         } else {
