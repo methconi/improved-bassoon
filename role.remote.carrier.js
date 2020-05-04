@@ -100,7 +100,7 @@ var roleRemoteCarrier = {
             } else {
                 creep.memory["mode"] = "store";
                 var target = null;
-                if (spawn.memory["energyToTerminal"]) [
+                if (spawn.memory["energyToTerminal"]) {
                     target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                         filter: structure => (structure.structureType == STRUCTURE_TERMINAL &&
                                               structure.store.getUsedCapacity(RESOURCE_ENERGY)
