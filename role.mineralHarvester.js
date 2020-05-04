@@ -26,7 +26,7 @@ var roleMineralHarvester = {
             if (!storage) { return; }
         }
 
-        if (creep.store.getFreeCapacity(mineral.mineralType) == 0) {
+        if (creep.store.getFreeCapacity(mineral.mineralType) < mineralHarvestCapacity(creep)) {
             creep.memory["mode"] = "store";
         } else if (creep.store[mineral.mineralType] == 0) {
             creep.memory["mode"] = "harvest";
@@ -54,5 +54,13 @@ var roleMineralHarvester = {
     }
     
 };
+
+mineralHarvestCapacity = function(creep) {
+    var capacity = 0;
+    for (var i = 0; i < creep.body.length; i++) {
+        if (creep.body[i].type == WORK) { capacity += 1; }
+    }
+    return capacity;
+}
 
 module.exports = roleMineralHarvester;

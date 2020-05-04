@@ -45,6 +45,26 @@ targetCreeps = function(spawn) {
                               WORK, WORK, WORK,
                               WORK, 
                               MOVE, CARRY, CARRY ];
+        
+        var bodyMineralHarvester;
+        if (extensions >= 18) {
+            bodyMineralHarvester = [ WORK, WORK, WORK, WORK, WORK,
+                                     WORK, WORK, WORK, WORK, 
+                                     MOVE, MOVE, MOVE, MOVE, MOVE,
+                                     CARRY ];
+
+        } else if (extensions >= 16) {
+            bodyMineralHarvester = [ WORK, WORK, WORK, WORK,
+                                     WORK, WORK, WORK, WORK,
+                                     MOVE, MOVE, MOVE, MOVE, MOVE,
+                                     CARRY ];
+        } else {
+            bodyMineralHarvester = [ WORK, WORK, WORK, WORK,
+                                     WORK, WORK, WORK,
+                                     MOVE, MOVE, MOVE, MOVE,
+                                     CARRY ];
+        }        
+        
         var bodyUpgrader = [ WORK, WORK, WORK,
                              WORK, WORK, WORK,
                              WORK, WORK,
@@ -99,6 +119,14 @@ targetCreeps = function(spawn) {
             /*{ name: "Carrier_3", body: bodyCarrier, role: "carrier",
               condition: (spawn => energyAvailableForUpgrade(spawn, 10) > 22),
               mem: { onlyUpgrade: true } },*/
+
+            { name: "Mineral_Harvester_1", body: bodyMineralHarvester,
+              role: "mineralHarvester",
+              condition: (function (spawn) {
+                  var mineral = Game.getObjectById(spawn.memory["mineral"]);
+                  if (!mineral) { return false; }
+                  return (mineral.mineralAmount > 0);
+              }) },
             
             { name: "Remote_Claimer_1", body: bodyRemoteClaimer, role: "remoteClaimer", remoteClaim: true },
 
