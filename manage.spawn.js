@@ -47,7 +47,12 @@ targetCreeps = function(spawn) {
                               MOVE, CARRY, CARRY ];
         
         var bodyMineralHarvester;
-        if (extensions >= 18) {
+        if (extensions >= 28) {
+            bodyMineralHarvester = [ WORK, WORK, WORK, WORK, WORK, WORK, WORK,
+                                     WORK, WORK, WORK, WORK, WORK, WORK,
+                                     MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE,
+                                     CARRY ];
+        } else if (extensions >= 18) {
             bodyMineralHarvester = [ WORK, WORK, WORK, WORK, WORK,
                                      WORK, WORK, WORK, WORK, 
                                      MOVE, MOVE, MOVE, MOVE, MOVE,

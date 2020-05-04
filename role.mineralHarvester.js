@@ -56,11 +56,16 @@ var roleMineralHarvester = {
 };
 
 mineralHarvestCapacity = function(creep) {
-    var capacity = 0;
-    for (var i = 0; i < creep.body.length; i++) {
-        if (creep.body[i].type == WORK) { capacity += 1; }
+    if ((typeof creep.memory["workParts"]) != "undefined") {
+        return creep.memory["workParts"];
     }
-    return capacity;
+        
+    var workParts = 0;    
+    for (var i = 0; i < creep.body.length; i++) {
+        if (creep.body[i].type == WORK) { workParts += 1; }
+    }
+    creep.memory["workParts"] = workParts;
+    return workParts;
 }
 
 module.exports = roleMineralHarvester;
