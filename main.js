@@ -255,3 +255,10 @@ oppositeDirection = function(direction) {
     }
 }
 */
+
+hasPart = function(creep, type) {
+    for (var i = 0; i < creep.body.length; i++) {
+        if (creep.body[i].type == type) { return true; }
+    }
+    return false;
+}
