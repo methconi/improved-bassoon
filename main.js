@@ -21,7 +21,11 @@ var market = require('market');
 module.exports.loop = function () {
     maybeCleanupDeadCreepsMemory();
 
-    market.check(Game.spawns["Spawn1"].room, RESOURCE_LEMERGIUM, 0.083);
+    if (Memory["market"] && Memory["market"]["room"]
+        && Memory["market"]["checkResource"] && Memory["checkMinPrice"]) {
+        market.check(Memory["market"]["room"], Memory["market"]["checkResource"],
+                     Memory["market"]["checkMinPrice"]);
+    }
     
     for(var name in Game.structures) {
         var structure = Game.structures[name];

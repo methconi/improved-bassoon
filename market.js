@@ -1,18 +1,20 @@
 var market = {
     
-    check: function(room, resourceType, minPrice) {
+    check: function(roomName, resourceType, minPrice) {
         var orders = Game.market.getAllOrders({type: ORDER_BUY,
                                                resourceType: resourceType})
         if (!Memory["market"]) { Memory["market"] = {}; }
+        if (!Memory["market"]["history"]) { Memory["market"]["history"] = {}; }
+        history = Memory["market"]["history"];
         for (i = 0; i < orders.length; i++) {
             var order = orders[i];
             if (order.price < minPrice) { continue; }
-            if (Memory["market"][order.id]) { continue; }
-            Memory["market"][order.id] = order;
-            var distance = Game.map.getRoomLinearDistance(room.name, order.roomName, true);
+            if (history[order.id]) { continue; }
+            history[order.id] = order;
+            var distance = Game.map.getRoomLinearDistance(roomName, order.roomName, true);
             var costRatio = 1 - Math.exp(-distance/30);
-            Memory["market"][order.id]["distance"] = distance;
-            Memory["market"][order.id]["costRatio"] = costRatio;
+            history[order.id]["distance"] = distance;
+            history[order.id]["costRatio"] = costRatio;
         }
     },
 
