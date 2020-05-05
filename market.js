@@ -19,9 +19,8 @@ var market = {
     
 };
 
-weeklyMarketReport = function(orderType, resourceType) {
-    var history = Game.market.getHistory({type: orderType,
-                                          resourceType: resourceType});
+weeklyMarketReport = function(resourceType) {
+    var history = Game.market.getHistory(resourceType);
     for (i = 0; i < history.length; i++) {
         console.log(history[i].date + ": " + history[i].avgPrice + " (" + history[i].stddevPrice + ") * "
                     + (history[i].volume/1000) + "k");
