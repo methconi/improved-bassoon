@@ -16,9 +16,13 @@ var roleRemoteCarrier = require('role.remote.carrier');
 var roleAntiDowngrader = require('role.antiDowngrader');
 var manageRemoteSpawn = require('manage.remote.spawn');
 
+var market = require('market');
+
 module.exports.loop = function () {
     maybeCleanupDeadCreepsMemory();
 
+    market.check(Game.spawns["Spawn1"].room, RESOURCE_LEMERGIUM, 0.76);
+    
     for(var name in Game.structures) {
         var structure = Game.structures[name];
         if (structure.structureType == STRUCTURE_TOWER) {
