@@ -18,7 +18,23 @@ var market = {
         }
     },
 
-    
+    checkEnergy: function(roomName, minPrice) {
+        var orders = Game.market.getAllOrders({type: ORDER_BUY, resourceType: RESOURCE_ENERGY});
+        for (var i = 0; i < orders.length; i++) {
+            if (order.price <= minPrice) { continue; }
+            var order = orders[i];
+            var distance = Game.map.getRoomLinearDistance(roomName,
+                                                          order.roomName);
+            var gain = order.price / (2 - Math.exp(-distance/30));
+            if (gain < minPrice) { continue; }
+            if (Memory["market"][order.id]) { continue; }
+            Memory["market"][order.id] = { gain: gain,
+                                           amount: order.amount,
+                                           remainingAmount: order.remainingAmount,
+                                           created: order.created,
+                                           createdTimestamp: order.createdTimestamp };
+        }
+    }
 };
 
 weeklyMarketReport = function(resourceType) {

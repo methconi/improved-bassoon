@@ -21,10 +21,14 @@ var market = require('market');
 module.exports.loop = function () {
     maybeCleanupDeadCreepsMemory();
 
-    if (Memory["market"] && Memory["market"]["room"]
-        && Memory["market"]["checkResource"] && Memory["market"]["checkMinPrice"]) {
-        market.check(Memory["market"]["room"], Memory["market"]["checkResource"],
-                     Memory["market"]["checkMinPrice"]);
+    if (Memory["market"] && Memory["market"]["room"]) {
+        var m = Memory["market"];
+        if (m["checkResource"] && m["checkMinPrice"]) {
+            market.check(m["room"], m["checkResource"], m["checkMinPrice"]);
+        }
+        if (m["checkEnergyMinPrice"]) {
+            market.checkEnergy(m["room"], m["checkEnergyMinPrice"]);
+        }
     }
     
     for(var name in Game.structures) {
