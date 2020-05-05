@@ -21,7 +21,7 @@ var market = require('market');
 module.exports.loop = function () {
     maybeCleanupDeadCreepsMemory();
 
-    market.check(Game.spawns["Spawn1"].room, RESOURCE_LEMERGIUM, 0.076);
+    market.check(Game.spawns["Spawn1"].room, RESOURCE_LEMERGIUM, 0.083);
     
     for(var name in Game.structures) {
         var structure = Game.structures[name];
