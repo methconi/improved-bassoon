@@ -33,6 +33,7 @@ var market = {
                 gain: gain,
                 amount: order.amount,
                 remainingAmount: order.remainingAmount,
+                price: order.price,
                 created: order.created,
                 createdTimestamp: order.createdTimestamp };
         }
