@@ -14,7 +14,38 @@ var market = {
             Memory["market"][order.id]["distance"] = distance;
             Memory["market"][order.id]["costRatio"] = costRatio;
         }
-    }
+    },
+
     
 };
+
+weeklyMarketReport = function(orderType, resourceType) {
+    var history = Game.market.getHistory({type: orderType,
+                                          resourceType: resourceType});
+    for (i = 0; i < history.length; i++) {
+        console.log(history[i].date + ": " + history[i].avgPrice + " (" + history[i].stddevPrice + ") * "
+                    + (history[i].volume/1000) + "k");
+    }
+    
+    var Avg = 0;
+    var Var = 0;
+    var Vol = 0;
+    
+    for (i = 0; i < history.length; i++) {
+        Vol += history[i].volume;
+        Avg += history[i].avgPrice * history[i].volume;
+    }
+    Avg = Avg / Vol;
+    for (i = 0; i < history.length; i++) {
+        Var += history[i].volume * (Math.pow(history[i].avgPrice - Avg, 2)
+                                    + Math.pow(history[i].stddevPrice, 2));
+    }
+    Var = Var / Vol;
+    
+    console.log("---------------");
+    console.log(Avg.toPrecision(3) + " (" + Math.sqrt(Var).toPrecision(3) + ") * "
+                + (Vol/1000000).toPrecision(3) + "M"); 
+}
+
+
 module.exports = market;
