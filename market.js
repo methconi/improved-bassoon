@@ -27,7 +27,8 @@ var market = {
                                                           order.roomName);
             var gain = order.price / (2 - Math.exp(-distance/30));
             if (gain < minPrice) { continue; }
-            if (Memory["market"][order.id]) { continue; }
+            if (Memory["market"]["energyHistory"][order.id]) { continue; }
+            if (!Memory["market"]["energyHistory"]) { Memory["market"]["energyHistory"] = {}; }
             Memory["market"]["energyHistory"][order.id] = {
                 gain: gain,
                 amount: order.amount,
