@@ -22,7 +22,7 @@ module.exports.loop = function () {
     maybeCleanupDeadCreepsMemory();
 
     if (Memory["market"] && Memory["market"]["room"]
-        && Memory["market"]["checkResource"] && Memory["checkMinPrice"]) {
+        && Memory["market"]["checkResource"] && Memory["market"]["checkMinPrice"]) {
         market.check(Memory["market"]["room"], Memory["market"]["checkResource"],
                      Memory["market"]["checkMinPrice"]);
     }
