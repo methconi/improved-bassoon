@@ -166,11 +166,6 @@ findEnergy = function(creep, opts = {}) {
         if (!target) {
             target = closestEnergyOrContainer(creep, additionalFilter, (avoidStorageLevel >= 1),
                                               creep.store.getFreeCapacity(RESOURCE_ENERGY));
-            if (target && !(target instanceof Resource)) {
-                targets = target.pos.findInRange(FIND_DROPPED_RESOURCES, 1, {
-                    filter: resource => resource.resourceType == RESOURCE_ENERGY });
-                if (targets.length > 0) { target = targets[0]; }
-            }
         }
         if (!target) {
             target = closestEnergyOrContainer(creep, additionalFilter, (avoidStorageLevel >= 2), 1);
@@ -193,9 +188,15 @@ findEnergy = function(creep, opts = {}) {
 }
 takeEnergy = function(creep, target) {
     var res;
+    var targets;
     if (target.resourceType == RESOURCE_ENERGY) {
         res = creep.pickup(target);
     } else {
+        if (creep.pos.inRangeTo(target, 1)) {
+            targets = target.pos.findInRange(FIND_DROPPED_RESOURCES, 1, {
+                filter: resource => resource.resourceType == RESOURCE_ENERGY });
+            if (targets.length > 0) { target = targets[0]; }
+        }
         res = creep.withdraw(target, RESOURCE_ENERGY);
     }
     if (res == OK) {
