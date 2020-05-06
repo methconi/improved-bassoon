@@ -132,7 +132,7 @@ carrierChooseNonPickupMode = function(creep) {
         if (target) {
             target = controller.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: structure => (structure.structureType == STRUCTURE_CONTAINER &&
-                                      structure.store.getFreeCapacity() >= creep.store[RESOURCE_ENERGY] &&
+                                      structure.store.getFreeCapacity() >= 0.5*creep.store[RESOURCE_ENERGY] &&
                                       structure.pos.inRangeTo(controller, 6)) });
             if (target) {
                 creep.memory["target"] = target.id;
