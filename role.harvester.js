@@ -7,7 +7,7 @@ var roleHarvester = {
             creep.memory["target"] = null;
             var res = creep.harvest(source);
             if (res == ERR_NOT_IN_RANGE) {
-                creep.moveTo(source);
+                creep.moveTo(source, { range: 1 });
             } else if (res == OK) {
                 creepRecordEnergyGain(creep, "harvested");
             } else if (creep.store[RESOURCE_ENERGY] > 0) {

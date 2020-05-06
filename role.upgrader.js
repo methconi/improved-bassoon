@@ -35,7 +35,7 @@ var roleUpgrader = {
             if (creep.memory["mode"] == "upgrade") {
                 var res = creep.upgradeController(controller);
                 if (res == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(controller);
+                    creep.moveTo(controller, { range: 3 });
                 } else if (res == OK) {
                     creepRecordEnergyUse(creep, "upgradeController")
                 }

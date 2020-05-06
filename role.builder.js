@@ -24,7 +24,7 @@ var roleBuilder = {
             if(target) {
                 var res = creep.build(target)
                 if(res == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(target);
+                    creep.moveTo(target, { range: 3 });
                 } else if (res == OK) {
                     creepRecordEnergyUse(creep, "build");
                 }
@@ -37,7 +37,7 @@ var roleBuilder = {
             if(target) {
                 var res = creep.repair(target)
                 if(res == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(target);
+                    creep.moveTo(target, { range: 3 });
                 } else if (res == OK) {
                     creepRecordEnergyUse(creep, "repair");
                 }
