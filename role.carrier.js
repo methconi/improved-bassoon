@@ -73,7 +73,8 @@ var roleCarrier = {
 findSpawnOrExtension = function(creep) {
     if (creep.memory["target"]) {
         var target = Game.getObjectById(creep.memory["target"]);
-        if (target && target.store && target.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
+        if (target && target.store && (target.store.getFreeCapacity(RESOURCE_ENERGY) >
+                                       0.05 * target.store.getCapacity(RESOURCE_ENERGY))) {
             return target;
         }
     }
