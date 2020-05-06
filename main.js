@@ -195,9 +195,14 @@ takeEnergy = function(creep, target) {
         if (creep.pos.inRangeTo(target, 1)) {
             targets = target.pos.findInRange(FIND_DROPPED_RESOURCES, 1, {
                 filter: resource => resource.resourceType == RESOURCE_ENERGY });
-            if (targets.length > 0) { target = targets[0]; }
+            if (targets.length > 0) {
+                res = creep.pickup(targets[0]);
+            } else {
+                res = creep.withdraw(target, RESOURCE_ENERGY);
+            }
+        } else {
+            res = ERR_NOT_IN_RANGE; 
         }
-        res = creep.withdraw(target, RESOURCE_ENERGY);
     }
     if (res == OK) {
         creep.memory["energyHope"] = 2;
