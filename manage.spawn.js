@@ -78,9 +78,16 @@ targetCreeps = function(spawn) {
         var bodyBuilder = [ MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, CARRY,
                             CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
                             WORK, WORK, WORK ];
-        var bodyCarrier = [ MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE,
+        var bodyCarrier;
+        if (extensions >= 24) {
+            bodyCarrier = [ MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE,
+                            CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
+                            CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY ];
+        } else {
+            bodyCarrier = [ MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE,
                             CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
                             CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY ];
+        }
 
         var bodyRemoteHarvester = [ WORK, WORK, WORK, WORK, // 0.43/tick
                                     MOVE, MOVE, MOVE, MOVE,

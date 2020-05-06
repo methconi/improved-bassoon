@@ -18,7 +18,9 @@ var roleCarrier = {
                 opts.avoidStorageLevel = 1;
             }
             var target = findEnergy(creep, opts);
-            if (target) {
+            if (target && (creep.pos.inRangeTo(target, 10) ||
+                           creep.store.getFreeCapacity(RESOURCE_ENERGY)
+                           >= 0.5*creep.store.getCapacity(RESOURCE_ENERGY))) {
                 var res = takeEnergy(creep, target);
                 if (res == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target);
