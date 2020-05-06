@@ -141,6 +141,7 @@ findEnergy = function(creep, opts = {}) {
         }
     }
     var target = null;
+    var targets;
     
     var upgrader = creep.memory["role"] == "upgrader";
     var controller = creep.room.controller;
@@ -165,6 +166,11 @@ findEnergy = function(creep, opts = {}) {
         if (!target) {
             target = closestEnergyOrContainer(creep, additionalFilter, (avoidStorageLevel >= 1),
                                               creep.store.getFreeCapacity(RESOURCE_ENERGY));
+            if (target && !(target instanceof Resource)) {
+                targets = target.pos.findInRange(FIND_DROPPED_RESOURCES, 1, {
+                    filter: resource => resource.resourceType == RESOURCE_ENERGY });
+                if (targets.length > 0) { target = targets[0]; }
+            }
         }
         if (!target) {
             target = closestEnergyOrContainer(creep, additionalFilter, (avoidStorageLevel >= 2), 1);
