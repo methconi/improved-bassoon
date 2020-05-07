@@ -2,6 +2,22 @@ var roleCarrier = {
     
     run: function(creep) {
         creep.memory["idle"] = false;
+
+        if (!(creep.memory["target"] && Game.getObjectById(creep.memory["target"]))
+            && creep.pos.roomName != Game.spawns[creep.memory["spawn"]].pos.roomName) {
+            creep.memory["mode"] = "goingHome";
+            creep.memory["target"] = Game.spawns[creep.memory["spawn"]].id;
+        }
+
+        if (creep.memory["mode"] == "goingHome") {
+            var target = Game.getObjectById(creep.memory["target"]);
+            creep.moveTo(target);
+            if (creep.pos.roomName == Game.spawns[creep.memory["spawn"]].pos.roomName) {
+                creep.memory["mode"] = "pickup";
+                creep.memory["target"] = null;
+            }
+            return;
+        }
         
         if (creep.store[RESOURCE_ENERGY] == 0 && !(creep.mode == "pickup")) {
             creep.memory["mode"] = "pickup";
