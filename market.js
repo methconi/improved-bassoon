@@ -18,24 +18,46 @@ var market = {
         }
     },
 
-    checkEnergy: function(roomName, minPrice) {
+    checkEnergy: function(roomName, minPrice, opts = {}) {
         var orders = Game.market.getAllOrders({type: ORDER_BUY, resourceType: RESOURCE_ENERGY});
+        var terminal = null;
         for (var i = 0; i < orders.length; i++) {
             var order = orders[i];
             if (order.price <= minPrice) { continue; }
             var distance = Game.map.getRoomLinearDistance(roomName,
                                                           order.roomName);
-            var gain = order.price / (2 - Math.exp(-distance/30));
+            var costRatio = 2 - Math.exp(-distance/30);
+            var gain = order.price / costRatio;
             if (gain < minPrice) { continue; }
             if (!Memory["market"]["energyHistory"]) { Memory["market"]["energyHistory"] = {}; }
-            if (Memory["market"]["energyHistory"][order.id]) { continue; }
-            Memory["market"]["energyHistory"][order.id] = {
-                gain: gain,
-                amount: order.amount,
-                remainingAmount: order.remainingAmount,
-                price: order.price,
-                created: order.created,
-                createdTimestamp: order.createdTimestamp };
+            if (!Memory["market"]["energyHistory"][order.id]) {             
+                Memory["market"]["energyHistory"][order.id] = {
+                    gain: gain,
+                    amount: order.amount,
+                    remainingAmount: order.remainingAmount,
+                    price: order.price,
+                    created: order.created,
+                    createdTimestamp: order.createdTimestamp };
+            }
+            
+            if (!(opts.doIt && gain >= opts.doItMinPrice)) { continue; }
+
+            if (!terminal) {
+                var terminals = Game.rooms[roomName].find(FIND_MY_STRUCTURES, {
+                    filter: (structure => structure.structureType == STRUCTURE_TERMINAL) });
+                if (terminals.length < 1) { continue; }
+                terminal = terminals[0];
+            }
+
+            var sellAmount = Math.min(Math.floor(terminal.store.getUsedCapacity(RESOURCE_ENERGY)/costRatio),
+                                      order.amount);
+            if (sellAmount == 0) { continue; }
+            var res = Game.market.deal(order.id, sellAmount, roomName);
+            if (res == OK) {
+                Memory["market"]["energyHistory"][order.id]["sold"] = sellAmount;
+            } else {
+                Memory["market"]["energyHistory"][order.id]["notSold"] = res;
+            }
         }
     }
 };

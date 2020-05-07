@@ -27,7 +27,8 @@ module.exports.loop = function () {
             market.check(m["room"], m["checkResource"], m["checkMinPrice"]);
         }
         if (m["checkEnergyMinPrice"]) {
-            market.checkEnergy(m["room"], m["checkEnergyMinPrice"]);
+            market.checkEnergy(m["room"], m["checkEnergyMinPrice"], {
+                doIt: true, doItMinPrice: m["sellEnergyMinPrice"] });
         }
     }
     
