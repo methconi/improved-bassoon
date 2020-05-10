@@ -45,6 +45,9 @@ module.exports.loop = function () {
     spawn = Game.spawns["Spawn2"];
     if (spawn) { manageRemoteSpawn.run(spawn); }
     
+    spawn = Game.spawns["Spawn3"];
+    if (spawn) { manageRemoteSpawn.run(spawn); }
+    
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
         if (creep.spawning) { continue; }
