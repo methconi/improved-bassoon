@@ -28,9 +28,9 @@ var manageTower = {
         }
         
         if (spawn && spawn.memory["energyUse"]
-            && !(spawn.memory["energyUse"]["wallUp"] > 0.5)
+            && !(spawn.memory["energyUse"]["wallUp"] > 2)
             && (tower.store[RESOURCE_ENERGY] >=
-                tower.store.getCapacity(RESOURCE_ENERGY) * 0.75)) {
+                tower.store.getCapacity(RESOURCE_ENERGY) * 0.25)) {
             var targets = tower.room.find(FIND_STRUCTURES, {
                 filter: structure =>
                     (structure.hits < structure.hitsMax &&
