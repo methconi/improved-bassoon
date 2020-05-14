@@ -23,9 +23,9 @@ module.exports.loop = function () {
 
     if (Memory["market"] && Memory["market"]["room"]) {
         var m = Memory["market"];
-        if (m["checkResource"] && m["checkMinPrice"]) {
+        /*if (m["checkResource"] && m["checkMinPrice"]) {
             market.check(m["room"], m["checkResource"], m["checkMinPrice"]);
-        }
+        }*/
         if (m["checkEnergyMinPrice"]) {
             market.checkEnergy(m["room"], m["checkEnergyMinPrice"], {
                 doIt: true, doItMinPrice: m["sellEnergyMinPrice"] });
